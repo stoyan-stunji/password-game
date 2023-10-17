@@ -5,9 +5,13 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "Windows.h"
+#include <chrono>
+#include <thread>
 
 #include "Timer.h"
+
+using namespace std::literals;
+static constexpr auto DELAY_TIME = 200ns;
 
 std::string get_captcha()
 {
@@ -711,7 +715,7 @@ class Container
                 {
                     if(this->has_random_gibberish == false)
                     {
-                        Sleep(200);
+						std::this_thread::sleep_for(DELAY_TIME);
                         std::cout << "\nHere are some RANDOM LETTERS!\n";
                         std::cout << ">> " << this->input;
                         std::string new_input = get_captcha();
